@@ -4,6 +4,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const multer = require("multer");
 const app = express();
 const port = process.env.PORT || 5000;
+//dotenv
+require('dotenv').config();
 
 // Middleware
 app.use(cors());
@@ -13,7 +15,7 @@ app.use(express.json());
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-const uri = "mongodb+srv://scroll-card:gOcSXTyrkjCP71lK@cluster0.3onslcg.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.3onslcg.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
